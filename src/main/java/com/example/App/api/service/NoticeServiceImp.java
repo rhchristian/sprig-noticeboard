@@ -40,6 +40,7 @@ public class NoticeServiceImp implements NoticeService {
 
     public  List<NoticeModel>  findPaginated(Integer pageNo, Integer pageSize, String sortBy) {
 
+
         Pageable paging = PageRequest.of(pageNo, pageSize);
 
         Page<NoticeModel> pagedResult = noticeRepository.findAll(paging);

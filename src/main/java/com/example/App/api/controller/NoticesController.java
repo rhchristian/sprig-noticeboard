@@ -14,9 +14,6 @@ import java.util.List;
 @RestController
 public class NoticesController {
 
-//    @Autowired
-//    private NoticeRepository repository;
-
     @Autowired
     private NoticeService noticeService;
 
