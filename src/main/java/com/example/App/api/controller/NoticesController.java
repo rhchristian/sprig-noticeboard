@@ -33,7 +33,7 @@ public class NoticesController {
         return repository.save(notice);
     }
 
-
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping(path = "/api/notices")
     public List<NoticeModel> findAll() {
         Iterable<NoticeModel> it = repository.findAll();
