@@ -8,7 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -21,9 +23,13 @@ public class NoticesController {
 
     @GetMapping(path = "/api/notice/{id}")
     public ResponseEntity read(@PathVariable("id")  Integer id){
+        Date date = new Date();
         return noticeService.getNotice(id)
-                .map(record -> ResponseEntity.ok().body(record))
-                .orElse(ResponseEntity.notFound().build());
+                .map(record -> {
+                    record.setPublicationDate(date);
+                    NoticeModel updated = noticeService.save(record);
+                    return ResponseEntity.ok().body(updated);
+                }).orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping(path = "/api/notice/save")
