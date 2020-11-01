@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class NoticesController {
 
@@ -30,7 +31,7 @@ public class NoticesController {
         return noticeService.save(notice);
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
+
     @GetMapping(path = "/api/notices")
     public List<NoticeModel> findAll() {
         Iterable<NoticeModel> it = noticeService.getAllNotices();
@@ -39,6 +40,7 @@ public class NoticesController {
 
         return notices;
     }
+
 
     @PutMapping(path = "/api/notice/update/{id}")
     public ResponseEntity  update(@PathVariable("id") Integer id, @RequestBody NoticeModel notice) {
@@ -57,6 +59,7 @@ public class NoticesController {
     public void delete(@PathVariable("id") Integer id) {
         noticeService.deleteNoticeById(id);
     }
+
 
     @GetMapping(path = "/api/noticesTest/{pageNo}")
     public ResponseEntity<List<NoticeModel>> getAllNotices(
